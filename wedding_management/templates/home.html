@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="jumbotron text-center">
+    <h1>Welcome to Wedding Planner</h1>
+    <p>Plan your dream wedding with ease. Explore services, book vendors, and contact us!</p>
+    <a href="{% url 'categories' %}" class="btn btn-primary">View Services</a>
+</div>
+{% endblock %}

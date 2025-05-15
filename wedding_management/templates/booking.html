@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Book a Service</h2>
+
+<!-- Debug: Display authentication status -->
+<!-- <p>Debug: User authenticated = {{ user.is_authenticated }}</p> -->
+
+{% if user.is_authenticated %}
+    <form method="post" id="bookingForm">
+        {% csrf_token %}
+        {% if form.initial.service %}
+            <!-- Display the pre-selected service as read-only -->
+            <div class="mb-3">
+                <label for="id_service" class="form-label">Service</label>
+                <input type="text" class="form-control" value="{{ form.initial.service.name }}" readonly>
+                <input type="hidden" name="service" value="{{ form.initial.service.id }}">
+            </div>
+            <!-- Render only the event_date field -->
+            <div class="mb-3">
+                <label for="id_event_date" class="form-label">Event Date</label>
+                {{ form.event_date }}
+            </div>
+        {% else %}
+            <!-- Fallback if no service is pre-selected -->
+            {{ form.as_p }}
+        {% endif %}
+        <button type="submit" class="btn btn-primary">Confirm Booking</button>
+    </form>
+{% else %}
+    <!-- Modal for unauthenticated users -->
+    <div id="authModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Please Log In</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Please log in to book a service.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}" class="btn btn-primary">Login</a>
+                    <a href="{% url 'register' %}" class="btn btn-secondary">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<!-- Link to external script.js -->
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}

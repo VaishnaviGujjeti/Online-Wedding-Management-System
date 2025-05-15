@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Contact Us</h2>
+<form method="post" id="contactForm">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!-- Link to external script.js -->
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}

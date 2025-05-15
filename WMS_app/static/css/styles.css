@@ -1,0 +1,17 @@
+body {
+    background-color: #f8f9fa;
+}
+.jumbotron {
+    background: linear-gradient(to right, #ff6f61, #ffb88c);
+    color: white;
+    padding: 50px;
+}
+.card {
+    transition: transform 0.2s;
+}
+.card:hover {
+    transform: scale(1.05);
+}
+.alert {
+    margin-top: 20px;
+}

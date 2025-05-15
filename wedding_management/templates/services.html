@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Services in {{ category.name }}</h2>
+<div class="row">
+    {% for service in services %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ service.name }}</h5>
+                    <p class="card-text">{{ service.description }}</p>
+                    <p><strong>Price:</strong> ₹{{ service.price }}</p>
+                    <p><strong>Category:</strong> {{ service.category.name }}</p>
+                    <p><strong>City:</strong> {{ service.city.name }}</p>
+                    <a href="{% url 'booking' %}?service_id={{ service.id }}" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No services available in this category.</p>
+    {% endfor %}
+</div>
+{% endblock %}
